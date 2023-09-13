@@ -43,6 +43,7 @@ export default function Home() {
         items={[null, ...items]}
         selectedItem={selectedItem}
         setSelectedItem={handleSelectedItem}
+        emptyLabel="Все"
       />
 
       <DetailInfo selectedItem={selectedItem} />

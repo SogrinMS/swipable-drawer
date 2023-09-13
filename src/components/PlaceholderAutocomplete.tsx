@@ -5,12 +5,14 @@ interface PlaceholderAutocompleteProps {
   items: Array<Item | null>;
   selectedItem: Item | null;
   setSelectedItem: (item: Item | null) => void;
+  emptyLabel?: string;
 }
 
 export const PlaceholderAutocomplete = ({
   items,
   selectedItem,
   setSelectedItem,
+  emptyLabel = "",
 }: PlaceholderAutocompleteProps) => {
   const handleChange = (_: React.SyntheticEvent, newValue: Item | null) => {
     setSelectedItem(newValue);
@@ -22,14 +24,13 @@ export const PlaceholderAutocomplete = ({
       value={selectedItem}
       onChange={handleChange}
       isOptionEqualToValue={(props, option) => props?.id === option?.id}
-      clearIcon={undefined}
-      getOptionLabel={(option) => option?.title ?? "Все"}
+      getOptionLabel={(option) => option?.title ?? emptyLabel}
       renderOption={(props, option) => {
         if (option === null) {
           return (
             // eslint-disable-next-line jsx-a11y/role-supports-aria-props
             <li {...props} aria-selected={!selectedItem}>
-              Все
+              {emptyLabel}
             </li>
           );
         }
@@ -41,7 +42,7 @@ export const PlaceholderAutocomplete = ({
           {...params}
           inputProps={{
             ...params.inputProps,
-            value: params.inputProps.value || "Все",
+            value: params.inputProps.value || emptyLabel,
           }}
         />
       )}

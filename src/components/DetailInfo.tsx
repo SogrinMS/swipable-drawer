@@ -1,6 +1,6 @@
 import { Item } from "@/pages";
 import { SwipeableDrawer } from "@mui/material";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 interface DetailInfoProps {
   selectedItem: Item | null;
@@ -17,8 +17,6 @@ export const DetailInfo = ({ selectedItem }: DetailInfoProps) => {
     setOpen(false);
   };
 
-  console.log(!selectedItem);
-
   return (
     <SwipeableDrawer
       key={selectedItem?.id}
@@ -30,6 +28,7 @@ export const DetailInfo = ({ selectedItem }: DetailInfoProps) => {
       classes={{
         paper: "overflow-visible",
       }}
+      hidden={!selectedItem}
     >
       <div className="absolute text-xl rounded-t-xl p-2 visible left-0 top-[-100px] right-0 h-[100px] bg-slate-500">
         <div className="h-[100px]">{selectedItem?.title}</div>
